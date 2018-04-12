@@ -38,9 +38,9 @@ typedef struct
 {
 	float coordinate[3];
 	float color[4];
-} Vertex;
+} Vertex1;
 
-Vertex m_vertex[36];
+Vertex1 m_vertex[36];
 GLubyte triangles[36];
 
 /* Variable to hold the VBO identifier and shader data */
@@ -427,13 +427,12 @@ void Game::initialize()
 
 
 
-	inFile.open("C:\\Users\\c00220386\\Source\\Repos\\Practical10\\SFMLOpenGL\\FragmentShader.txt");
+	inFile.open("C:\\Users\\C00220386\\Desktop\\Practical10\\SFMLOpenGL\\FragmentShader.txt");
 	if (!inFile) {
 		cerr << "Unable to open file datafile.txt";
 		exit(1);   // call system to stop
 	}
 	inFile.close();
-
 
 	/* Vertex Shader which would normally be loaded from an external file */
 	const char* vs_src = "#version 400\n\r"
@@ -540,7 +539,7 @@ void Game::update()
 			rotationAngle -= 360.0f;
 		}
 	}
-
+	Matrix3 matrix1;
 	//Change vertex data
 	/*m_vertex[0].coordinate[0] += -0.0001f;
 	m_vertex[0].coordinate[1] += -0.0001f;
@@ -554,6 +553,26 @@ void Game::update()
 	m_vertex[2].coordinate[1] += -0.0001f;
 	m_vertex[2].coordinate[2] += -0.0001f;*/
 
+	for (int index = 0; index < 36; index++)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			m_vertex[index].coordinate[0] += -0.001f;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			m_vertex[index].coordinate[0] += 0.001f;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			m_vertex[index].coordinate[1] += 0.001f;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			m_vertex[index].coordinate[1] += -0.001f;
+		}
+
+}
 #if (DEBUG >= 2)
 	DEBUG_MSG("Update up...");
 #endif
@@ -603,5 +622,10 @@ void Game::unload()
 #endif
 	glDeleteProgram(progID);
 	glDeleteBuffers(1, vbo);
+}
+
+std::string Game::loadShaderFromFile(const std::string & textFile)
+{
+	return std::string();
 }
 

@@ -1,15 +1,42 @@
-#ifndef MATRIX3_H
-#define MATRIX3_H
+#pragma once
 
-namespace gpp
+#include <math.h>
+#include "string"
+#include <SFML/Graphics.hpp>
+
+class Vector
 {
-	class Vector3
-	{
-	public:
-		Vector3() {};
-		~Vector3() {};
-	private:
-	};
-}
+public:
+	double getX();
+	void setX(double value);
 
-#endif
+	double getY();
+	void setY(double value);
+
+	double getZ();
+	void setZ(double value);
+
+	Vector();
+	Vector(double x1, double y1, double z1);
+	Vector(Vector * V);
+	double length();
+	double lengthSquared();
+	void normalise();
+
+	Vector operator +(Vector V1);
+	Vector operator -(Vector V1);
+	Vector operator -();
+	double operator *(Vector V1);
+	Vector operator *(double k);
+	Vector operator *(float k);
+	Vector operator *(int k);
+	Vector operator ^(Vector V1);
+	std::string Vector::toString();
+
+
+
+private:
+	double x;
+	double y;
+	double z;
+};

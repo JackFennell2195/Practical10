@@ -16,7 +16,7 @@
 
 using namespace std;
 using namespace sf;
-using namespace gpp;
+//using namespace gpp;
 
 class Game
 {
@@ -32,6 +32,7 @@ private:
 	void render();
 	void unload();
 
+	std::string loadShaderFromFile(const std::string & textFile);
 	Clock clock;
 	Time elapsed;
 	ifstream inFile;
